@@ -593,3 +593,11 @@ h2{font-size:clamp(38px,2.75vw,44px);line-height:1.18}
     justify-content:stretch;
   }
 }
+
+/* Center the overlapping film panel by its actual height, including text reflow. */
+@media(min-width:901px){
+  .film-visual{display:grid;grid-template-columns:minmax(0,1fr);align-items:center}
+  .film-visual>img{grid-area:1/1;align-self:center}
+  .film-card{grid-area:1/1;position:relative;top:auto;right:0;justify-self:end;align-self:center;margin:0}
+}
+.faq-grid{align-items:start}
