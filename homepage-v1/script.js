@@ -39,7 +39,14 @@ const faqGrid = document.querySelector('.faq-grid');
 faqGrid.innerHTML = faqData.map(([question, answer], index) => `<article class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-${index}"><span class="faq-icon">?</span><span>${question}</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-${index}"><p>${answer}</p></div></article>`).join('');
 faqGrid.addEventListener('click', (event) => {
   const button = event.target.closest('.faq-question'); if (!button) return;
-  const item = button.closest('.faq-item'); const open = item.classList.toggle('open');
+  const item = button.closest('.faq-item'); const open = !item.classList.contains('open');
+  faqGrid.querySelectorAll('.faq-item.open').forEach((other) => {
+    other.classList.remove('open');
+    const otherButton = other.querySelector('.faq-question');
+    otherButton.setAttribute('aria-expanded', 'false');
+    otherButton.lastElementChild.textContent = '+';
+  });
+  item.classList.toggle('open', open);
   button.setAttribute('aria-expanded', String(open)); button.lastElementChild.textContent = open ? '−' : '+';
 });
 
